@@ -4,7 +4,6 @@ import BottomNav from "./nav/bottomNav";
 import TopNav from "./nav/TopNav";
 
 const Nav = () => {
-   console.log("re-render");
     return ( 
         <nav className="bg-[#232f3e] lg:p-2">
             <div className="container">
