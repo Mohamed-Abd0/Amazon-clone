@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Icon } from "@mui/material";
+import { Stack,Box , Icon } from "@mui/material";
 import { Link } from "react-router-dom";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
@@ -19,11 +19,11 @@ const BackToHome = () => {
         "a:hover": { textDecoration: "underline" },
       }}
     >
-      <Link to="/">
-        <Icon sx={{ mt: "-5px" }}>
+      <Link to="/" style={{display: "inline-block"}}>
+        <Stack flexDirection="row"><Icon sx={{ mt: "-5px" }}>
           <KeyboardArrowLeftIcon />{" "}
         </Icon>
-        <span>Back To Home</span>
+        <span>Back To Home</span></Stack>
       </Link>
     </Box>
   );

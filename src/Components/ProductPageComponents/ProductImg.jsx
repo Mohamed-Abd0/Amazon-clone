@@ -1,36 +1,31 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { productContent } from "./../../Data/TestData";
 import { Stack, Box, CardMedia } from "@mui/material";
+import { setCurrentImg } from "../../Store/ProductSlice";
 const ProductImg = () => {
-  const { productId } = useParams();
+  const {
+    product: { productImgs },
+    currentImg,
+  } = useSelector(({ ProductSlice }) => ProductSlice);
 
-  const { productImgs } = productContent[+productId];
-
-  const [activeImg, setActiveImg] = useState(productImgs);
-
-  const activeImgHandler = (item) => {
-    const index = productImgs.findIndex((e) => e.src === item.src);
-
-    const result = productImgs.map((e) => ({ state: false, src: e.src }));
-
-    result[index].state = true;
-
-    setActiveImg(result);
-  };
+  const action = useDispatch();
 
   const renderinOthersIms = () =>
-    activeImg.map((item, index) => (
+    productImgs?.map((item, index) => (
       <Box
         key={index}
         sx={{
-          border: `${item.state ? "1px solid transparent" : "1px solid gray"}`,
-          boxShadow: `${item.state ? "0px 0px 2px 2px orange" : ""}`,
+          border: `${
+            item.src === currentImg ? "1px solid transparent" : "1px solid gray"
+          }`,
+          boxShadow: `${
+            item.src === currentImg ? "0px 0px 2px 2px orange" : ""
+          }`,
           p: 0.3,
           cursor: "pointer",
         }}
-        onClick={() => activeImgHandler(item)}
+        onClick={() => action(setCurrentImg(item.src))}
       >
         <CardMedia
           component="img"
@@ -43,7 +38,7 @@ const ProductImg = () => {
   return (
     <Stack
       flexDirection={{ xs: "column", sm: "row" }}
-      sx={{ width: { md: "40%" } }}
+      sx={{position : {md : "sticky"},top : "80px",maxHeight: { md : "400px"} ,width: { md: "40%" } }}
       gap={3}
     >
       <Stack
@@ -56,7 +51,7 @@ const ProductImg = () => {
       </Stack>
       <Box sx={{ flexGrow: 1, order: { xs: 1, sm: 2 } }}>
         <CardMedia
-          src={activeImg.filter((e) => e.state === true)[0].src}
+          src={currentImg}
           component="img"
           sx={{
             maxHeight: "400px",

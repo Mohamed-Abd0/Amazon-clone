@@ -1,30 +1,21 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import { CardContent, CardMedia, Card } from "@mui/material";
 import { Typography } from "@mui/material";
 
 const SwiperContainer = (props) => {
-  const { products } = props;
+  const { products, breakPoints } = props;
 
-  const breakPoints = {
-    320: {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-    568: {
-      slidesPerView: 2,
-      spaceBetween: 30,
-    },
-    992: {
-      slidesPerView: 3,
-      spaceBetween: 40,
-    },
-  };
+  const navigate = useNavigate();
 
   const productsRendering = () =>
     products.map((product) => (
-      <SwiperSlide key={product.id}>
+      <SwiperSlide
+        key={product.id}
+        onClick={() => navigate(`/product/${product.id}`)}
+        style={{ cursor: "pointer" }}
+      >
         <Card sx={{ boxShadow: "none" }}>
           <CardMedia
             src={product?.productImgs[0].src}
@@ -46,7 +37,7 @@ const SwiperContainer = (props) => {
     ));
 
   return (
-    <Swiper spaceBetween={50} loop={true} breakpoints={breakPoints}>
+    <Swiper loop={true} breakpoints={breakPoints}>
       {productsRendering()}
     </Swiper>
   );
