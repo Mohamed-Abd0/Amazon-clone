@@ -5,7 +5,7 @@ import Home from '../src/Pages/Home';
 import Layout from '../src/Components/Layout/Layout';
 import Cart from '../src/Pages/Cart';
 import LogIn from '../src/Pages/LogIn';
-import Payment from '../src/Pages/Payment';
+import Payment from './Pages/CheckoutForm/Checkout/Payment';
 import NotFound from '../src/Pages/NotFound';
 import Product from '../src/Pages/Product';
 
