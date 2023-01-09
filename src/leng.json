@@ -1,0 +1,16 @@
+{
+    "en" : {
+        "country" : "egypt" , 
+        "ChangeLanguage" : "Change language" ,
+        "LearnMore" : "Learn more" ,  
+        "delverTo" : "delverTo" 
+        } ,
+        "ar" : {
+            "country" : "مصر" ,
+            "ChangeLanguage" : "تغيير اللغة" ,
+            "LearnMore" : "معرفة المزيد" ,
+            "delverTo" : "توصيل الى" 
+        } 
+        
+    
+}
