@@ -12,10 +12,12 @@ import LogIn from "../src/Pages/LogIn";
 import Payment from "../src/Pages/Payment";
 import NotFound from "../src/Pages/NotFound";
 import Product from "../src/Pages/Product";
+import Header from "./Components/Header";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
+      <Route path="/header" element={<Header />} />
       <Route index element={<Home />} />
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/cart" element={<Cart />} />

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../..//img/logo.png";
-import { getactiveLeng } from "../../globel state/reducsers/lengRedusers";
+import { getactiveLeng } from "../../Store/reducsers/lengRedusers";
 import cart from "../../img/cart.png";
 import words from "../../leng.json";
 const TopNav = () => {
@@ -52,9 +52,9 @@ const TopNav = () => {
           <i className="fa-solid fa-location-dot ltr:mr-2 rtl:ml-2 "></i>
           <div className="">
             <p className="text-[#ccc] text-[12px]">
-              {langWordsActive.delverTo}
+              {/* {langWordsActive.delverTo} */}
             </p>
-            <p className="capitalize  font-bold">{langWordsActive.country}</p>
+            {/* <p className="capitalize  font-bold">{langWordsActive.country}</p> */}
           </div>
         </div>
       </div>
@@ -98,9 +98,9 @@ const TopNav = () => {
             <i className="fa-solid fa-caret-up absolute -top-4 left-[30%] text-white text-xl"></i>
 
             <div className="flex items-center justify-between capitalize ">
-              <span>{langWordsActive.ChangeLanguage}</span>
+              {/* <span>{langWordsActive.ChangeLanguage}</span> */}
               <Link className="text-[#007185]" to={"#"}>
-                {langWordsActive.LearnMore}
+                {/* {langWordsActive.LearnMore} */}
               </Link>
             </div>
 
