@@ -14,8 +14,16 @@ body {
     @apply border border-transparent hover:border-white duration-200 p-2; 
 }
 
+.border-active {
+    @apply border-mainColor
+}
 
-/* add all files css  this class*/
+@layer components {
+    .title-sec {
+        @apply text-xl font-bold mb-3  ltr:text-end px-6;
+    }
 
-
-/* part-prodect group col-span-4 maxmd:col-span-6 maxsm:col-span-10 duration-300 hover:-translate-y-4  text-center  cursor-pointer   rounded-2xl  bg-white p-3 */
+    .sec {
+        @apply my-3  ; 
+    }
+}

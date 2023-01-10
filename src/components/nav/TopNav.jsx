@@ -5,23 +5,19 @@ import logo from "../..//img/logo.png"
 import { getactiveLeng } from "../../globel state/reducsers/lengRedusers";
 import cart from "../../img/cart.png"
 import words from "../../leng.json"
-const TopNav = () => {
+const TopNav = ({setShowDilog , setShowCanvas}) => {
     const ref = useRef() ; 
+    const inputRef = useRef() ; 
     const dispatch = useDispatch() ; 
     const lengActive = useSelector((state) => state) ; 
     dispatch(getactiveLeng())
     const langWordsActive = words[`${lengActive.leng.lang }`] ; 
-
-    
     const [leng , setLeng] = useState([ {name : "english - en" , dir : "ltr" , short : "en"} , {name : "العربية - ar" , dir : "rtl" , short : "ar"}   ]) ; 
-    
     const handleChangeLueng = (ev) => {
         localStorage.setItem("dir" , ev.getAttribute("direction") ) ; 
         localStorage.setItem("lengActive" , ev.getAttribute("short-name-leng") ) ;
         window.location.reload() ; 
-        
     }
-    
     useEffect(() => {
         const activeLeng = lengActive.leng.lang ; 
         const activeDir = lengActive.leng.dir ; 
@@ -36,20 +32,28 @@ const TopNav = () => {
         })
     } , [])
 
-
+    const focusInput = (ev) => {
+        inputRef.current.classList.add("border-active")
+        setShowDilog(true) ; 
+    }
+    
+    const blurInput = () => {
+        setShowDilog(false)
+        inputRef.current.classList.remove("border-active")
+    }
 
     return ( 
-        <div className="top-nav flex items-center lg:h-[60px] maxlg:flex-wrap maxlg:justify-between">
-        <div className="left flex  lg:items-center ">
-            <div className="open-menu lg:hidden ltr:mr-2 rtl:ml-2">
-                <i className="fa-solid fa-bars text-2xl text-white cursor-pointer"></i>
+        <div className= {"top-nav flex items-center md:h-[60px] maxmd:flex-wrap maxmd:justify-between" } >
+        <div className="left flex  md:items-center ">
+            <div className="open-menu md:hidden ltr:mr-2 rtl:ml-2">
+                <i onClick={() => setShowCanvas(true)} className="fa-solid fa-bars text-2xl text-white cursor-pointer"></i>
             </div>
-            <div className = "logo w-28 hover-item ">
+            <div  className = {`logo w-28 hover-item `}>
                 <Link to={"/"} className = "w-full h-full">
                     <img className="w-full h-full" src={logo} /> 
                 </Link>
             </div>
-            <div className="flex items-center text-white hover-item cursor-pointer maxlg:hidden">
+            <div className="flex items-center text-white hover-item cursor-pointer maxmd:hidden ltr:mr-4 rtl:ml-4 ">
                 <i className="fa-solid fa-location-dot ltr:mr-2 rtl:ml-2 "></i>
                 <div className="">
                     <p className="text-[#ccc] text-[12px]">{langWordsActive.delverTo}</p>
@@ -58,7 +62,7 @@ const TopNav = () => {
             </div>
         </div>
 
-        <div className="input-search relative lg:flex-1 maxlg:order-1 maxlg:w-full flex items-center  h-11 group border-2 border-transparent mt-2">
+        <div ref={inputRef} className="input-search relative md:flex-1 maxmd:order-1 maxmd:w-full flex items-center  h-11 group border-2 border-transparent mt-2 rounded-lg">
             <div className="select-cat h-full" >
                 <select className="select-category focus:border-mainColor border-2  h-full text-[#0F1111] bg-[#f3f3f3]  border-[#f3f3f3] capitalize outline-none ltr:rounded-l-md rtl:rounded-r-md">
                     <option value={"cat1"}>all</option>
@@ -72,15 +76,18 @@ const TopNav = () => {
                     <option value={"cat3"}>cat1</option>
                 </select>
             </div>
-            <div className="input flex-1 h-full ">
-                <input type={"text"} className = "w-full outline-none h-full group-focus:border-mainColor"/>
+            <div className="input flex-1 h-full relative">
+                <input  onFocus={(ev) => focusInput(ev.target)} onBlur = {(ev) => blurInput(ev.target)} type={"text"} className = "w-full outline-none h-full group-focus:border-mainColor"/>
+                <div className="search-result absolute w-full bg-white top-full left-0 rounded-b-md shadow-md hidden">
+                
+                </div>
             </div>
             <div className="icon-search flex items-center justify-center bg-[#febd69] hover:bg-[#f3a847] border-2 border-transparent focus:border-mainColor   h-full w-11 cursor-pointer rtl:rounded-l-md ltr:rounded-r-md">
                 <i className="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <div className="right  flex items-center">
-            <div className="h-full flex group items-center  uppercase text-white text-sm hover-item relative maxlg:hidden">
+        <div className="right  flex items-center ltr:ml-4 rtl:mr-4 ">
+            <div onMouseOver={() => setShowDilog(true)} onMouseLeave = {() => setShowDilog(false)} className="h-full flex group items-center  uppercase text-white text-sm hover-item relative maxmd:hidden">
                 <Link to={"#"} className="leng-top flex cursor-pointer">
                     <img alt="fleg" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/125px-Flag_of_the_United_States.svg.png" className="w-7"/> 
                     <span className="mx-2">en</span>
@@ -133,7 +140,7 @@ const TopNav = () => {
                 </div>
             </div>
 
-            <div className="relative ltr:ml-3 rtl:m-3 hover-item group sing-in maxlg:hidden">
+            <div onMouseOver={() => setShowDilog(true)} onMouseLeave = {() => setShowDilog(false)} className="relative ltr:ml-3 rtl:m-3 hover-item group sing-in maxmd:hidden ">
                 <Link to={"#"} className = "text-white">
                     <p className="text-xs ">Hello, sign in</p>
                     <p className="">Account & Lists <span className="fa-solid fa-caret-down text-[#ccc]"></span> </p> 
@@ -170,14 +177,14 @@ const TopNav = () => {
                 </div>
             </div>
 
-            <div className="ltr:ml-3 rtl:m-3 hover-item maxlg:hidden">
+            <div className="ltr:ml-3 rtl:m-3 hover-item maxmd:hidden">
                 <Link to={"#"} className = "text-white">
                     <p className="text-xs">Returns</p>
                     <p className="text-sm font-bold"> & Orders</p>
                 </Link>
             </div>
-            <div className="ltr:ml-3 rtl:m-3 hover-item maxlg:flex">
-            <Link to={"sign-in"} className="lg:hidden flex items-center text-white ltr:mr-3 rtl:ml-3 ">
+            <div className="ltr:ml-3 rtl:m-3 hover-item maxmd:flex">
+            <Link to={"sign-in"} className="md:hidden flex items-center text-white ltr:mr-3 rtl:ml-3 ">
                 <span className="text-[#ccc] text-sm">sign in <span className="fa-solid fa-chevron-right text-xs ltr:mr-1 rtl:ml-1"></span></span>
                 <span className="fa-solid fa-user text-3xl"></span>
             </Link>
@@ -189,7 +196,7 @@ const TopNav = () => {
                 </span>
                 </div>
             
-                    <span className="text-xs maxlg:hidden">Carts</span>
+                    <span className="text-xs maxmd:hidden">Carts</span>
                 </Link>
             </div>
         </div>

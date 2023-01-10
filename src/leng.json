@@ -1,9 +1,9 @@
 {
     "en" : {
-        "country" : "egypt" , 
-        "ChangeLanguage" : "Change language" ,
-        "LearnMore" : "Learn more" ,  
-        "delverTo" : "delverTo" 
+            "country" : "egypt" , 
+            "ChangeLanguage" : "Change language" ,
+            "LearnMore" : "Learn more" ,  
+            "delverTo" : "delverTo" 
         } ,
         "ar" : {
             "country" : "مصر" ,
